@@ -9,9 +9,8 @@ from rest_framework_nested import routers
 
 from ads.views import AdViewSet, CommentViewSet
 
-# TODO здесь необходимо подклюючит нужные нам urls к проекту
-router = SimpleRouter()
 
+router = SimpleRouter()
 router.register('api/ads', AdViewSet)
 router.register("users", UserViewSet, basename="users")
 
