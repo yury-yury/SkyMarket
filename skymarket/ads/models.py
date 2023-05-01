@@ -1,3 +1,4 @@
+from typing import List
 from django.db import models
 
 from users.models import User
@@ -5,7 +6,7 @@ from users.models import User
 
 class Ad(models.Model):
     """
-    The Ad class is an inheritor of the Model class from the models library. It is a data model contained
+    The Ad class is an inheritor of the Model class from the django.db.models module. It is a data model contained
     in the ads database table. Contains a description of the types and constraints of the model fields.
     """
     title = models.CharField(max_length=150)
@@ -20,9 +21,9 @@ class Ad(models.Model):
         The Meta class is used to change the behavior of model fields, such as verbose_name - the human-readable
         name of the model. And contains rules for sorting ads during output.
         """
-        verbose_name = 'Объявление'
-        verbose_name_plural = 'Объявления'
-        ordering = ['-created_at']
+        verbose_name: str = 'Объявление'
+        verbose_name_plural: str = 'Объявления'
+        ordering: List[str] = ['-created_at', ]
 
     def __str__(self) -> str:
         """
@@ -48,9 +49,9 @@ class Comment(models.Model):
         The Meta class is used to change the behavior of model fields, such as verbose_name - the human-readable
         name of the model. And contains rules for sorting comments during output.
         """
-        verbose_name = 'Комментарий'
-        verbose_name_plural = 'Комментарии'
-        ordering = ['-created_at']
+        verbose_name: str = 'Комментарий'
+        verbose_name_plural: str = 'Комментарии'
+        ordering: List[str] = ['-created_at']
 
     def __str__(self) -> str:
         """

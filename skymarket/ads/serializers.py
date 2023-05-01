@@ -1,3 +1,4 @@
+from django.db.models import Model
 from rest_framework import serializers
 
 from ads.models import Ad, Comment
@@ -13,8 +14,8 @@ class CommentSerializer(serializers.ModelSerializer):
         The Meta class is an internal service class of the serializer,
         defines the necessary parameters for the serializer to function.
         """
-        model = Comment
-        fields = '__all__'
+        model: Model = Comment
+        fields: str = '__all__'
 
 
 class AdSerializer(serializers.ModelSerializer):
@@ -27,5 +28,5 @@ class AdSerializer(serializers.ModelSerializer):
         The Meta class is an internal service class of the serializer,
         defines the necessary parameters for the serializer to function.
         """
-        model = Ad
-        fields = '__all__'
+        model: Model = Ad
+        fields: str = '__all__'

@@ -7,7 +7,7 @@ class IsAdmin(BasePermission):
     of the rest_framework library. Controls access to protected endpoints.
     Allows access only to authenticated users with the administrator role.
     """
-    message = "You must have role ADMIN"
+    message: str = "You must have role ADMIN"
 
     def has_permission(self, request, view) -> bool:
         """
@@ -25,7 +25,7 @@ class IsExecutor(BasePermission):
     of the rest_framework library. Controls access to protected endpoints.
     Allows access only to authenticated users who are the owners of the records.
     """
-    message = "You must be the owner of the record."
+    message: str = "You must be the owner of the record."
 
     def has_object_permission(self, request, view, obj) -> bool:
         """

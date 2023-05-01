@@ -1,4 +1,6 @@
+from typing import Tuple
 import django_filters
+from django.db.models import Model
 
 from ads.models import Ad
 
@@ -14,5 +16,5 @@ class AdFilter(django_filters.rest_framework.FilterSet):
         """
         A metaclass is an internal service class that defines the necessary parameters for the production of ad search.
         """
-        model = Ad
-        fields = ('title', )
+        model: Model = Ad
+        fields: Tuple[str] = ('title', )
