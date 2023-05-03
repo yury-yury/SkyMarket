@@ -1,7 +1,5 @@
 from django.contrib.auth.models import BaseUserManager
 
-from users.models import User
-
 
 class UserManager(BaseUserManager):
     """
@@ -10,7 +8,7 @@ class UserManager(BaseUserManager):
     """
     use_in_migrations = True
 
-    def create_user(self, email: str, first_name: str, last_name: str, phone: str, password: str = None) -> User:
+    def create_user(self, email: str, first_name: str, last_name: str, phone: str, password: str = None):
         """
         The create_user function overrides the method of the base class. Accepts as arguments the instance itself,
         the value of the fields email, first_name, last_name, phone and password. Creates and saves an instance
@@ -35,7 +33,7 @@ class UserManager(BaseUserManager):
 
         return user
 
-    def create_superuser(self, email: str, first_name: str, last_name: str, phone: str, password: str = None) -> User:
+    def create_superuser(self, email: str, first_name: str, last_name: str, phone: str, password: str = None):
         """
         The create_superuser function overrides the method of the base class. Accepts as arguments the instance itself,
         the value of the fields email, first_name, last_name, phone and password. Creates and saves an instance
