@@ -12,7 +12,7 @@ from ads.views import AdViewSet, CommentViewSet
 
 router = SimpleRouter()
 router.register('api/ads', AdViewSet)
-router.register("users", UserViewSet, basename="users")
+router.register("api/users", UserViewSet, basename="users")
 
 comment_router = routers.NestedSimpleRouter(router, "api/ads", lookup='ads')
 comment_router.register("comments", CommentViewSet, basename="comments")
@@ -22,7 +22,7 @@ urlpatterns = [
     path("api/redoc-tasks/", include("redoc.urls")),
     path("api/schema/", SpectacularAPIView.as_view(), name='schema'),
     path("api/schema/swagger-ui/", SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
-    path('users/', include('djoser.urls.jwt')),
+    path("api/users/", include('djoser.urls.jwt')),
 ]
 urlpatterns += router.urls
 urlpatterns += comment_router.urls
