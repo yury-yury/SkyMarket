@@ -1,6 +1,7 @@
 from typing import List, Tuple
 
 from django.contrib.auth.models import AbstractBaseUser, AbstractUser
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 
 from phonenumber_field.modelfields import PhoneNumberField
@@ -25,6 +26,7 @@ class User(AbstractUser):
     email = models.EmailField(_("email address"), unique=True)
     phone = PhoneNumberField(null=True, blank=True)
     image = models.ImageField(upload_to="images/", blank=True, null=True)
+    username = models.CharField(max_length=150, unique=False, null=True, default=None)
 
     objects = UserManager()
 

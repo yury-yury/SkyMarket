@@ -17,11 +17,11 @@ class UserManager(BaseUserManager):
         if not email:
             raise ValueError('Users must have an email address')
 
-        username = email.split('@')[0]
+        # username = email.split('@')[0]
 
         user = self.model(
             email=self.normalize_email(email),
-            username=username,
+            # username=username,
             first_name=first_name,
             last_name=last_name,
             phone=phone,
@@ -40,7 +40,7 @@ class UserManager(BaseUserManager):
         of the User model with the admin role in the database. Returns the created instance.
         """
         user = self.create_user(
-            email,
+            email=email,
             first_name=first_name,
             last_name=last_name,
             phone=phone,

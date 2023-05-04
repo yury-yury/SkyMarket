@@ -29,7 +29,7 @@ SECRET_KEY = "django-insecure-vpvsd0%a*6n1s4@w+wmt*$loc_p4zw^pw6z@e8e21iwii%m3&5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["*", ]
 
 
 # Application definition
@@ -66,6 +66,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "skymarket.urls"
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 TEMPLATES = [
     {
@@ -119,12 +121,12 @@ DJOSER = {
 # TODO здесь необходимо настроить подключение к БД
 DATABASES = {
     'default': {
-        'ENGINE': os.environ.get("DB_ENGINE", 'django.db.backends.postgresql'),
-        'NAME': os.environ.get("DB_NAME", 'skymarket'),
-        'USER': os.environ.get("DB_USER", 'skymarket'),
-        'PASSWORD': os.environ.get("DB_PASSWORD", 'skymarket'),
-        'HOST': os.environ.get("DB_HOST", 'localhost'),
-        'PORT': os.environ.get("DB_PORT", '5444'),
+        'ENGINE': os.environ.get("DB_ENGINE"), # , 'django.db.backends.postgresql'
+        'NAME': os.environ.get("DB_NAME"), # , 'skymarket'
+        'USER': os.environ.get("DB_USER"),
+        'PASSWORD': os.environ.get("DB_PASSWORD"),
+        'HOST': os.environ.get("DB_HOST"), # , 'localhost'
+        'PORT': os.environ.get("DB_PORT"), # , '5444'
     }
 }
 
