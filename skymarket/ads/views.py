@@ -30,6 +30,12 @@ class AdViewSet(viewsets.ModelViewSet):
     filterset_class = AdFilter
 
     def create(self, request, *args, **kwargs):
+        """
+        The create function complements the base class method with additional functionality, autofill
+        of the author field with the value of the current user. The function takes as arguments the instance
+        of the class itself, the request object, and all other positional and named parameters. After that,
+        the method of the parent class is called.
+        """
         self.request.data["author"] = self.request.user.id
         return super().create(request, *args, **kwargs)
 
