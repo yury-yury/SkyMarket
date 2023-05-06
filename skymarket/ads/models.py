@@ -10,8 +10,8 @@ class Ad(models.Model):
     in the ads database table. Contains a description of the types and constraints of the model fields.
     """
     title = models.CharField(max_length=150)
-    price = models.IntegerField()
-    description = models.TextField()
+    price = models.IntegerField(default=0)
+    description = models.TextField(null=True, blank=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     image = models.ImageField(upload_to="images/", blank=True, null=True, default=None)
@@ -31,7 +31,6 @@ class Ad(models.Model):
         an output format for instances of this class.
         """
         return self.title
-
 
 
 class Comment(models.Model):
