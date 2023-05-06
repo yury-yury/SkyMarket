@@ -15,7 +15,7 @@ class CommentSerializer(serializers.ModelSerializer):
         defines the necessary parameters for the serializer to function.
         """
         model: Model = Comment
-        fields: str = '__all__'
+        fields: str = ("pk", "ad", "author", "text", "created_at")
 
 
 class AdSerializer(serializers.ModelSerializer):

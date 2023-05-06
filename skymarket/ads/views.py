@@ -46,7 +46,7 @@ class AdViewSet(viewsets.ModelViewSet):
         in the implemented by this class.
         """
         if self.action == "list":
-            self.permission_classes = [AllowAny,]
+            self.permission_classes = [AllowAny, ]
         elif self.action in ["retrieve", "me", ]:
             self.permission_classes = [IsAuthenticated, ]
         else:
@@ -61,7 +61,7 @@ class AdViewSet(viewsets.ModelViewSet):
         The me function is a method of the AdViewSet class and extends the CRUD methods of the base class.
         Adds a custom endpoint.
         """
-        self.queryset = Ad.objects.filter(author=request.user)
+        self.queryset = Ad.objects.filter(author=request.user).all()
         return super().list(self, request, *args, **kwargs)
 
 
@@ -73,16 +73,16 @@ class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
 
-    def perform_create(self, serializer):
+    def create(self, request, *args, **kwargs):
         """
-        The perform_create function is a utility method of the Comment View Set class and overrides the method
-        of the base class. Used when creating a new instance of the Comment class of a comment
-        to an existing declaration.
+        The create function complements the base class method with additional functionality, autofill
+        of the author field with the value of the current user and autofill ad field with value of current ad.
+        The function takes as arguments the instance of the class itself, the request object, and all other positional
+        and named parameters. After that, the method of the parent class is called.
         """
-        ad_id = self.kwargs.get("ads_pk")
-        ad_instance = get_object_or_404(Ad, id=ad_id)
-        user = self.request.user
-        serializer.save(author=user, ad=ad_instance)
+        self.request.data["author"] = self.request.user.id
+        self.request.data["ad"] = self.kwargs.get("ads_pk")
+        return super().create(request, *args, **kwargs)
 
     def get_queryset(self, *args, **kwargs):
         """
