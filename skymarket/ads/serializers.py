@@ -29,4 +29,4 @@ class AdSerializer(serializers.ModelSerializer):
         defines the necessary parameters for the serializer to function.
         """
         model: Model = Ad
-        fields: str = '__all__'
+        fields: str = ("pk", "title", "author", "created_at", "description", "price", "image")

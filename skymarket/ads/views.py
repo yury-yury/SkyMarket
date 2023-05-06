@@ -29,6 +29,10 @@ class AdViewSet(viewsets.ModelViewSet):
     filter_backends = (DjangoFilterBackend, )
     filterset_class = AdFilter
 
+    def create(self, request, *args, **kwargs):
+        self.request.data["author"] = self.request.user.id
+        return super().create(request, *args, **kwargs)
+
     def get_permissions(self):
         """
         The get_permissions function is a method of the AdViewSet class and extends the functionality
@@ -43,6 +47,7 @@ class AdViewSet(viewsets.ModelViewSet):
             self.permission_classes = [IsAuthenticated, IsAdmin | IsExecutor]
 
         return super().get_permissions()
+
 
     @action(detail=False, methods=['get'])
     def me(self, request, *args, **kwargs):
