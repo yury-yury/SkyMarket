@@ -36,7 +36,9 @@ class AdViewSet(viewsets.ModelViewSet):
         of the class itself, the request object, and all other positional and named parameters. After that,
         the method of the parent class is called.
         """
-        self.request.data["author"] = self.request.user.id
+        self.request.data["author_id"] = self.request.user.id
+        self.request.data["author"] = self.request.user.pk
+
         return super().create(request, *args, **kwargs)
 
     def get_permissions(self):
@@ -80,8 +82,11 @@ class CommentViewSet(viewsets.ModelViewSet):
         The function takes as arguments the instance of the class itself, the request object, and all other positional
         and named parameters. After that, the method of the parent class is called.
         """
-        self.request.data["author"] = self.request.user.id
+        self.request.data["author_id"] = self.request.user.id
+        self.request.data["author"] = self.request.user.pk
+        self.request.data["ad_id"] = self.kwargs.get("ads_pk")
         self.request.data["ad"] = self.kwargs.get("ads_pk")
+
         return super().create(request, *args, **kwargs)
 
     def get_queryset(self, *args, **kwargs):
