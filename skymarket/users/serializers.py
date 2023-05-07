@@ -33,4 +33,4 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         defines the necessary parameters for the serializer to function.
         """
         model = User
-        fields = ('first_name', 'last_name', 'phone', 'image')
+        fields = ('first_name', 'last_name', ) # 'phone', 'image'
