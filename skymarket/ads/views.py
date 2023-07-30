@@ -2,10 +2,10 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import pagination, viewsets
 from rest_framework.decorators import action
 from rest_framework.generics import get_object_or_404
-from rest_framework.permissions import AllowAny, IsAuthenticated
+from rest_framework.permissions import AllowAny, IsAuthenticated, IsAuthenticatedOrReadOnly
 
 from ads.models import Ad, Comment
-from ads.permissions import IsAdmin, IsExecutor
+from ads.permissions import IsAdminOrIsExecutor
 from ads.serializers import AdSerializer, CommentSerializer
 from ads.filters import AdFilter
 
@@ -52,7 +52,7 @@ class AdViewSet(viewsets.ModelViewSet):
         elif self.action in ["retrieve", "me", ]:
             self.permission_classes = [IsAuthenticated, ]
         else:
-            self.permission_classes = [IsAuthenticated, IsAdmin | IsExecutor]
+            self.permission_classes = [IsAuthenticated, IsAdminOrIsExecutor]
 
         return super().get_permissions()
 
@@ -108,6 +108,5 @@ class CommentViewSet(viewsets.ModelViewSet):
         elif self.action == "retrieve":
             self.permission_classes = [IsAuthenticated, ]
         else:
-            self.permission_classes = [IsAuthenticated, IsAdmin | IsExecutor, ]
+            self.permission_classes = [IsAuthenticated, IsAdminOrIsExecutor, ]
         return super().get_permissions()
-
